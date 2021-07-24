@@ -18,6 +18,17 @@ def login_verify():
     password1 = password_verify.get()
     username_entry1.delete(0, END)
     password_entry1.delete(0, END)
+
+    list_of_files = os.listdir()
+    if username1 in list_of_files:
+        file1 = open(username1, "r")
+        verify = file1.read().splitlines()
+        if password1 in verify:
+            print("Login Success")
+        else:
+            print("Password Not Recognized")
+    else:
+        print("User not found")
 def register():
     global screen1
     screen1 = Toplevel(screen)
