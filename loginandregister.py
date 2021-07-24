@@ -1,6 +1,52 @@
 from tkinter import *
 import os
 
+def delete2(): 
+  screen3.destroy()
+
+def delete3(): 
+  screen4.destroy()
+
+def delete4(): 
+  screen5.destroy()
+
+def logout():
+  screen7.destroy()
+
+def session():
+  screen8 = Toplevel(screen)
+  screen8.title("Dashboard")
+  screen.geometry("400x400")
+  Label(screen8, text = "Welcome to Dashboard").pack()
+  Button(screen8, text = "Open Banking App").pack()
+  Button(screen8, text = "View Transactions").pack()
+
+
+def login_success():
+  global screen3
+  screen3 = Toplevel(screen)
+  screen3.title("Success")
+  screen3.geometry("150x100")
+  Label(screen3, text = "Login success").pack()
+  Button(screen3, text = "OK", command = delete2).pack()
+
+def password_not_recognized():
+  global screen4
+  screen4 = Toplevel(screen)
+  screen4.title("Error!")
+  screen4.geometry("150x100")
+  Label(screen4, text = "Password Not Recognized!").pack()
+  Button(screen4, text = "OK", command = delete3).pack()
+
+
+def user_not_found():
+  global screen5
+  screen5 = Toplevel(screen)
+  screen5.title("Error!")
+  screen5.geometry("150x100")
+  Label(screen5, text = "User Not Recognized!").pack()
+  Button(screen5, text = "OK", command = delete4).pack()
+
 def register_user():
     username_info = username.get()
     password_info = password.get()
@@ -24,11 +70,11 @@ def login_verify():
         file1 = open(username1, "r")
         verify = file1.read().splitlines()
         if password1 in verify:
-            print("Login Success")
+            login_success()
         else:
-            print("Password Not Recognized")
+            password_not_recognized()
     else:
-        print("User not found")
+        user_not_found()
 def register():
     global screen1
     screen1 = Toplevel(screen)
@@ -77,7 +123,7 @@ def login():
     password_entry1 = Entry(screen2, textvariable = password_verify)
     password_entry1.pack()
     Label(screen2, text = "").pack()
-    Button(screen2, text = "Login", width = 10, height = 1, command = login_verify)
+    Button(screen2, text = "Login", width = 10, height = 1, command = login_verify).pack()
 
 
 def mainScreen():
