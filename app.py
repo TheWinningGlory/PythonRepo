@@ -277,62 +277,43 @@ createdAccountpassword = input("Enter password that you want to create:\t")
 
 
 class bankAccount:
-    def __init__(self, money_in_account, withdrawl, deposit, username, password, ammount_of_deposit,
-                 ammount_of_withdrawl, balance):
+    def __init__(self, money_in_account, withdrawl, deposit, ammount_of_deposit, ammount_of_withdrawl, balance):
         self.money_in_account = money_in_account
         self.withdrawl = withdrawl
         self.deposit = deposit
-        self.username = username
-        self.password = password
         self.ammount_of_deposit = ammount_of_deposit
         self.ammount_of_withdrawl = ammount_of_withdrawl
         self.balance = balance
 
     ammount_of_deposit = int(input("How much do you want to deposit:\t"))
     ammount_of_withdrawl = int(input("How much do you want to withdrawl:\t"))
-    username = input("Enter username:\t")
-    password = input("Enter password:\t")
     money_in_account = 0
     balance = money_in_account + ammount_of_deposit - ammount_of_withdrawl
     passwordChecker = len(createdAccountpassword) > 10
-    one_more_password_check = createdAccountpassword != createdAccountusername
     finalBalance = f"Remaining Ammount: ${balance}"
     how_many_times = 0
-
-    while passwordChecker and one_more_password_check is True:
-        while createdAccountusername != username and createdAccountpassword != password and balance > ammount_of_withdrawl:
-            print("Either username or password is not correct. Please try again.")
-            username = input("Enter username:\t")
-            password = input("Enter password:\t")
-            if createdAccountusername == username and createdAccountpassword == password:
-                print("""
-        Intiallalizing...
-        Loading Account...
-        Account Balance = $0
-        """)
-            transaction = input("""
-        make a deposit - d
-        make a withdrawl - w
-        Enter transaction:\t
-        """)
-            ammount_of_deposit = int(input("How much do you want to deposit:\t"))
-            ammount_of_withdrawl = int(input("How much do you want to withdrawl:\t"))
-            balance = money_in_account + ammount_of_deposit - ammount_of_withdrawl
-            if transaction.lower == "w" and ammount_of_withdrawl <= balance:
-                print("Transaction succesful")
-            elif transaction.lower() == "w" and ammount_of_withdrawl > balance:
-                print("Sorry but you don't have that much money in your account!")
-                break
-            else:
-                print("Error please try again")
-        while how_many_times < 1:
-            print(finalBalance)
-            print("Thank You for doing your transaction with iBank!")
-            how_many_times += 1
+    
+    print("Either username or password is not correct. Please try again.")
+    print("""
+    Intiallalizing...
+    Loading Account...
+    Account Balance: $0
+    """)
+    transaction = input("""
+    make a deposit - d
+    make a withdrawl - w
+    Enter transaction:\t
+    """)
+    ammount_of_deposit = int(input("How much do you want to deposit:\t"))
+    ammount_of_withdrawl = int(input("How much do you want to withdrawl:\t"))
+    balance = money_in_account + ammount_of_deposit - ammount_of_withdrawl
+    if transaction.lower == "w" and ammount_of_withdrawl <= balance:
+        print("Transaction succesful")
+    elif transaction.lower() == "w" and ammount_of_withdrawl > balance:
+        print("Sorry but you don't have that much money in your account!")
     else:
-        print("Error! Password and Username are same!")
-
-
-
-
-
+        print("Error please try again")
+    while how_many_times < 1:
+        print(finalBalance)
+        print("Thank You for doing your transaction with iBank!")
+        how_many_times += 1
