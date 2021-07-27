@@ -7,47 +7,46 @@ def delete2():
 def delete3():
   screen4.destroy()
 
-def bank_account_code():
+def delete4():
+  screen5.destroy()
 
-  class bankAccount:
-      def __init__(self, money_in_account, withdrawl, deposit, ammount_of_deposit, ammount_of_withdrawl, balance):
-          self.money_in_account = money_in_account
-          self.withdrawl = int(input("How much do you want to withdrawl:\t"))
-          self.deposit = int(input("How much do you want to deposit:\t"))
-          self.balance = balance
-
-      money_in_account = 0
-      balance = money_in_account + deposit - withdrawl
-      finalBalance = f"Remaining Ammount: ${balance}"
-      how_many_times = 0
+def help_section():
+  global screen9
+  screen9 = Toplevel(screen)
+  screen9.title("Help")
+  screen9.geometry("300x250")
   
-      print("""
-      Intiallalizing...
-      Loading Account...
-      Account Balance: $0
-      """)
-      transaction = input("""
-      make a deposit - d
-      make a withdrawl - w
-      Enter transaction:\t
-      """)
+  Label(screen9, text = """
+  You typed help
+  Please rerun this app after you are done reading the following
+  1. type d - to deposit ammount
+  2. type w - to withdraw ammount
+  """).pack()
+def transaction_hub():
+  global screen7
+  screen7 = Toplevel(screen)
+  screen7.title("Transaction Hub")
+  screen7.geometry("450x300")
+  
+  Label(screen7, text = """
+  type h - help
+  type d - deposit
+  type w - withdrawl""").pack()
+  enter_command = Entry(screen7, text = "")
+  enter_command.pack()
+  Button(screen7, text = "Done").pack()
 
-    
-      if transaction.lower == "w":
-        print(self.withdrawl)
-      elif transaction.lower == "d":
-        print(self.deposit)
-      balance = money_in_account + deposit - withdrawl
-      if transaction.lower == "w" and self.withdrawl <= balance:
-        print("Transaction succesful")
-      elif transaction.lower() == "w" and withdrawl > balance:
-        print("Sorry but you don't have that much money in your account!")
-      else:
-        print("Error please try again")
-      while how_many_times < 1:
-        print(finalBalance)
-        print("Thank You for doing your transaction with iBank!")
-        how_many_times += 1
+  if enter_command == "h".lower():
+    Button(screen7, text = "Help Page", command = help_section).pack()
+
+
+def bank_account_code():
+  global screen6
+  screen6 = Toplevel(screen)
+  screen6.title("Banking Application")
+  screen6.geometry("300x250")
+  Label(screen6, text = "Welcome to iBank").pack()
+  Button(screen6, text = "Transaction Hub", command = transaction_hub).pack()
 
 def session():
   global screen5
