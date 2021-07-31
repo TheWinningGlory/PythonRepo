@@ -1,6 +1,7 @@
 from tkinter import *
 import os
 
+
 def delete2():
   screen3.destroy()
 
@@ -10,51 +11,65 @@ def delete3():
 def delete4():
   screen5.destroy()
 
-def help_section():
-  global screen9
-  screen9 = Toplevel(screen)
-  screen9.title("Help")
-  screen9.geometry("300x250")
-  
-  Label(screen9, text = """
-  You typed help
-  Please rerun this app after you are done reading the following
-  1. type d - to deposit ammount
-  2. type w - to withdraw ammount
-  """).pack()
-def transaction_hub():
-  global screen7
+def withdraw():
   screen7 = Toplevel(screen)
-  screen7.title("Transaction Hub")
-  screen7.geometry("450x300")
-  
-  Label(screen7, text = """
-  type h - help
-  type d - deposit
-  type w - withdrawl""").pack()
-  enter_command = Entry(screen7, text = "")
-  enter_command.pack()
+  screen7.title("Withdraw")
+  screen7.geometry("400x250")
+
+  Label(screen7, text = "Enter value of withdrawl").pack()
+  ammount_of_withdrawl = Entry(screen7, text = "")
+  ammount_of_withdrawl.pack()
+  withdrawl_ammount = ammount_of_withdrawl.get()
   Button(screen7, text = "Done").pack()
+  file2 = open("withdrawl_ammount.txt", "w")
+  ammount_in_account_withdrawl = file2.read().splitlines()
 
-  if enter_command == "h".lower():
-    Button(screen7, text = "Help Page", command = help_section).pack()
+def deposit():
+  screen8 = Toplevel(screen)
+  screen8.title("Deposit")
+  screen8.geometry("400x250")
 
+  Label(screen8, text = "Enter value of deposit").pack()
+  ammount_of_deposit = Entry(screen8, text = "")
+  ammount_of_deposit.pack()
+  deposit_ammount = ammount_of_deposit.get()
+  Button(screen8, text = "Done").pack()
+  file3 = open("deposit_ammount.txt", "w")
+  ammount_in_account_deposit = file3.read().splitlines()
+  
+def user_info():
+  screen9 = Toplevel(screen)
+  screen9.title("User Info")
+  screen9.geometry("400x250")
 
+def total():
+  screen10 = Toplevel(screen)
+  screen10.title("Total Ammount")
+  screen10.geometry("300x250")
+  
+  Label(screen10, text = ammount_in_account_deposit - ammount_in_account_withdrawl).pack()
+  
 def bank_account_code():
-  global screen6
   screen6 = Toplevel(screen)
-  screen6.title("Banking Application")
-  screen6.geometry("300x250")
-  Label(screen6, text = "Welcome to iBank").pack()
-  Button(screen6, text = "Transaction Hub", command = transaction_hub).pack()
+  screen6.title("Transactions Hub - Banking App")
+  screen6.geometry("400x300")
 
+  Label(screen6, text = "Welcome to Transactions Hub. This is where you make all of your transactions.").pack()
+  Label(screen6, text = "Balance: $0").pack()
+  Button(screen6, text = "Withdraw", command = withdraw).pack()
+  Button(screen6, text = "Deposit", command = deposit).pack()
+  Button(screen6, text = "Total in Account", command = total).pack()
+  
+    
 def session():
   global screen5
   screen5 = Toplevel(screen)
   screen5.title("Dashboard")
   screen5.geometry("400x400")
+  
   Label(screen5, text = "Welcome to Dashboard").pack()
   Button(screen5, text = "Open Banking App", command = bank_account_code).pack()
+  Button(screen5, text = "User Data", command = user_info).pack()
   
 
 def login_success():
