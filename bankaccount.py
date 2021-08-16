@@ -73,11 +73,15 @@ def register():
   global password
   global usernameEntry
   global passwordEntry
-  global gender
-  global age
+  global genderEntry
+  global ageEntry
   username = StringVar()
   password = StringVar()
-  
+  username_verify = StringVar()
+  password_verify = StringVar()
+  age_verify = StringVar()
+  gender_verify = StringVar()
+ 
 
   Label(screen1, text = "Please enter details below").pack()
   Label(screen1, text = "").pack()
@@ -85,6 +89,9 @@ def register():
   usernameEntry = Entry(screen1, textvariable = username)
   usernameEntry.pack()
   Label(screen1, text = "Password * ").pack()
+  global password_entry
+  password_entry = Entry(screen1, text = "")
+  password_entry.pack()
   Label(screen1, text = "").pack()
   Label(screen1, text = "Age * ").pack()
   age_entry = Entry(screen1, textvariable = age_verify)
@@ -93,8 +100,6 @@ def register():
   Label(screen1, text = "Gender * ").pack()
   gender_entry = Entry(screen1, textvariable = gender_verify)
   gender_entry.pack()
-  passwordEntry = Entry(screen1, textvariable = password)
-  passwordEntry.pack()
   Label(screen1, text = "").pack()
   Button(screen1, text = "Register", width = "10", height = "1", command = register_user).pack()
 
@@ -105,13 +110,11 @@ def login():
   screen2.geometry("300x250")
   Label(screen2, text = "Please enter details below to login").pack()
   Label(screen2, text = "").pack()
-  global username_verify
-  global password_verify
 
-  username_verify = StringVar()
-  password_verify = StringVar()
-  age_verify = StringVar()
-  gender_verify = StringVar()
+  username_verify1 = StringVar()
+  password_verify1 = StringVar()
+  age_verify1 = StringVar()
+  gender_verify1 = StringVar()
   
   global age_entry1
   global username_entry1
@@ -119,19 +122,19 @@ def login():
   global gender_entry1
 
   Label(screen2, text = "Name * ").pack()
-  username_entry1 = Entry(screen2, textvariable = username_verify)
+  username_entry1 = Entry(screen2, textvariable = username_verify1)
   username_entry1.pack()
   Label(screen2, text = "").pack()
   Label(screen2, text = "Age * ").pack()
-  age_entry1 = Entry(screen2, textvariable = age_verify)
+  age_entry1 = Entry(screen2, textvariable = age_verify1)
   age_entry1.pack()
   Label(screen2, text = "").pack()
   Label(screen2, text = "Gender * ").pack()
-  gender_entry1 = Entry(screen2, textvariable = gender_verify)
+  gender_entry1 = Entry(screen2, textvariable = gender_verify1)
   gender_entry1.pack()
   Label(screen2, text = "").pack()
   Label(screen2, text = "Password * ").pack()
-  password_entry1 = Entry(screen2, textvariable = password_verify)
+  password_entry1 = Entry(screen2, textvariable = password_verify1)
   password_entry1.pack()
   Label(screen2, text = "").pack()
   Button(screen2, text = "Login", width = 10, height = 1, command = login_verify).pack()
@@ -141,8 +144,8 @@ def mainScreen():
   global screen
   screen = Tk()
   screen.geometry("300x250")
-  screen.title("Notes 1.0")
-  Label(text = "Notes 1.0", bg = "grey", width = "300", height = "2", font = ("Calibri", 13)).pack()
+  screen.title("Banking App")
+  Label(text = "Banking App 1.0", bg = "grey", width = "300", height = "2", font = ("Calibri", 13)).pack()
   Label(text = "").pack()
   Button(text = "Login", height = "2", width = "30", command = login).pack()
   Label(text = "").pack()
