@@ -1,50 +1,152 @@
-#imports
 from tkinter import *
 import os
 
-#Main Screen
-master = Tk()
-master.title("Banking App 1.0")
 
-#Image Import
+def delete2():
+  screen3.destroy()
 
-#Functions
+def delete3():
+  screen4.destroy()
+
+def delete4():
+  screen5.destroy()
+  
+def login_success():
+  global screen3
+  screen3 = Toplevel(screen)
+  screen3.title("Success")
+  screen3.geometry("150x100")
+  Label(screen3, text = "Login success").pack()
+  Button(screen3, text = "OK", command = delete2).pack()
+  
+def password_not_recognized():
+  global screen4
+  screen4 = Toplevel(screen)
+  screen4.title("Error!")
+  screen4.geometry("150x100")
+  Label(screen4, text = "Password Not Recognized!").pack()
+  Button(screen4, text = "OK", command = delete3).pack()
+
+def user_not_found():
+  global screen5
+  screen5 = Toplevel(screen)
+  screen5.title("Error!")
+  screen5.geometry("150x100")
+  Label(screen5, text = "User Not Recognized!").pack()
+  Button(screen5, text = "OK", command = delete4).pack()
+
+def register_user():
+  username_info = username.get()
+  password_info = password.get()
+
+  file = open(username_info, "w")
+  file.write(username_info + "\n")
+  file.write(password_info)
+  file.close()
+  usernameEntry.delete(0, END)
+  passwordEntry.delete(0, END)
+
+  Label(screen1, text = "Registration successful", fg = "green", font = ("calibri", 11)).pack()
+def login_verify():
+  username1 = username_verify.get()
+  password1 = password_verify.get()
+  username_entry1.delete(0, END)
+  password_entry1.delete(0, END)
+
+  list_of_files = os.listdir()
+  if username1 in list_of_files:
+    file1 = open(username1, "r")
+    verify = file1.read().splitlines()
+    if password1 in verify:
+      login_success()
+    else:
+      password_not_recognized()
+  else:
+    user_not_found()
 def register():
-    #Vars
-    temp_name=StringVar()
-    temp_age=StringVar()
-    temp_gender=StringVar()
-    temp_password=StringVar()
-    #Register Screen
-    register_screen = Toplevel(master)
-    register_screen.title('Register')
-    register_screen.geometry('300x250')
-    
-    #Labels
-    Label(register_screen, text="Please enter your details below to register", font=('Calibri',12)).grid(row=0,sticky=N)
-    Label(register_screen, text="Name",font=('Calibri',12)).grid(row=1,sticky=W)
-    Label(register_screen, text="Age",font=('Calibri',12)).grid(row=2,sticky=W)
-    Label(register_screen, text="Gender",font=('Calibri',12)).grid(row=3,sticky=W)
-    Label(register_screen, text="Password",font=('Calibri',12),show="*").grid(row=4,sticky=W)
+  global screen1
+  screen1 = Toplevel(screen)
+  screen1.title("Register")
+  screen1.geometry("300x250")
 
-    #Entries
-    Entry(register_screen,text_variable=temp_name).grid(row=1)
-    Entry(register_screen,text_variable=temp_age).grid(row=2)
-    Entry(register_screen,text_variable=temp_gender).grid(row=3)
-    Entry(register_screen,text_variable=temp_password,show="*").grid(row=4)
+  global username
+  global password
+  global usernameEntry
+  global passwordEntry
+  global gender
+  global age
+  username = StringVar()
+  password = StringVar()
+  
 
-    #Register Button
-    Button(register_screen,text="Register").pack
+  Label(screen1, text = "Please enter details below").pack()
+  Label(screen1, text = "").pack()
+  Label(screen1, text = "Name * ").pack()
+  usernameEntry = Entry(screen1, textvariable = username)
+  usernameEntry.pack()
+  Label(screen1, text = "Password * ").pack()
+  Label(screen1, text = "").pack()
+  Label(screen1, text = "Age * ").pack()
+  age_entry = Entry(screen1, textvariable = age_verify)
+  age_entry.pack()
+  Label(screen1, text = "").pack()
+  Label(screen1, text = "Gender * ").pack()
+  gender_entry = Entry(screen1, textvariable = gender_verify)
+  gender_entry.pack()
+  passwordEntry = Entry(screen1, textvariable = password)
+  passwordEntry.pack()
+  Label(screen1, text = "").pack()
+  Button(screen1, text = "Register", width = "10", height = "1", command = register_user).pack()
+
 def login():
-    print("Login Page")
+  global screen2
+  screen2 = Toplevel(screen)
+  screen2.title("Login")
+  screen2.geometry("300x250")
+  Label(screen2, text = "Please enter details below to login").pack()
+  Label(screen2, text = "").pack()
+  global username_verify
+  global password_verify
 
-#Labels
-Label(master, text ="Banking Beta", font=('Calibri',14)).grid(row=0, sticky=N, pady=10)
-Label(master, text="the most secure you've probably used", font=('Calibri',12)).grid(row=1, sticky=N)
+  username_verify = StringVar()
+  password_verify = StringVar()
+  age_verify = StringVar()
+  gender_verify = StringVar()
+  
+  global age_entry1
+  global username_entry1
+  global password_entry1
+  global gender_entry1
 
-#Buttons
-Button(master, text="Login", font=('Calibri',12),width=20,command=login).grid(row=3, sticky=N)
-Button(master, text="Register", font=('Calibri',12),width=20,command=register).grid(row=4, sticky=N, pady=10)
+  Label(screen2, text = "Name * ").pack()
+  username_entry1 = Entry(screen2, textvariable = username_verify)
+  username_entry1.pack()
+  Label(screen2, text = "").pack()
+  Label(screen2, text = "Age * ").pack()
+  age_entry1 = Entry(screen2, textvariable = age_verify)
+  age_entry1.pack()
+  Label(screen2, text = "").pack()
+  Label(screen2, text = "Gender * ").pack()
+  gender_entry1 = Entry(screen2, textvariable = gender_verify)
+  gender_entry1.pack()
+  Label(screen2, text = "").pack()
+  Label(screen2, text = "Password * ").pack()
+  password_entry1 = Entry(screen2, textvariable = password_verify)
+  password_entry1.pack()
+  Label(screen2, text = "").pack()
+  Button(screen2, text = "Login", width = 10, height = 1, command = login_verify).pack()
 
-                                                                                         
-master.mainloop()
+
+def mainScreen():
+  global screen
+  screen = Tk()
+  screen.geometry("300x250")
+  screen.title("Notes 1.0")
+  Label(text = "Notes 1.0", bg = "grey", width = "300", height = "2", font = ("Calibri", 13)).pack()
+  Label(text = "").pack()
+  Button(text = "Login", height = "2", width = "30", command = login).pack()
+  Label(text = "").pack()
+  Button(text = "Register", height = "2", width = "30", command = register).pack()
+  screen.mainloop()
+
+mainScreen()
