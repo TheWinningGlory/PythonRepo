@@ -38,7 +38,7 @@ def user_not_found():
 def register_user():
   username_info = username.get()
   password_info = password.get()
-
+  age_info = age
   file = open(username_info, "w")
   file.write(username_info + "\n")
   file.write(password_info)
@@ -88,10 +88,6 @@ def register():
   Label(screen1, text = "Name * ").pack()
   usernameEntry = Entry(screen1, textvariable = username)
   usernameEntry.pack()
-  Label(screen1, text = "Password * ").pack()
-  global password_entry
-  password_entry = Entry(screen1, text = "")
-  password_entry.pack()
   Label(screen1, text = "").pack()
   Label(screen1, text = "Age * ").pack()
   age_entry = Entry(screen1, textvariable = age_verify)
@@ -101,7 +97,12 @@ def register():
   gender_entry = Entry(screen1, textvariable = gender_verify)
   gender_entry.pack()
   Label(screen1, text = "").pack()
+  Label(screen1, text = "Password * ").pack()
+  passwordEntry = Entry(screen1, text = "")
+  passwordEntry.pack()
+  Label(screen1, text = "").pack()
   Button(screen1, text = "Register", width = "10", height = "1", command = register_user).pack()
+  
 
 def login():
   global screen2
